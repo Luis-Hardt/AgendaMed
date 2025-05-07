@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, table * {
+            border: 1px solid black;
+        }
+    </style>
+    <title>AgendaMed Fila</title>
+</head>
+<body>
+    <h1>Fila de Exames</h1>
+    <a href="{% url 'exame-create' %}">Novo Exame</a>
+    <table>
+        {% if exames %}
+        <thead>
+            <tr>
+                <th>Chamada</th>
+                <th>Status</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exame in exames %}
+            <tr>
+                <td>{{ exame.pk|stringformat:'06d' }}</td>
+                <td>{% if exame == first_form %}Aguardando{% else %}Em espera{% endif %}</td>
+                <td>
+                    <a href="{% url 'exame-detail' exame.pk %}">Visualizar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        {% else %}
+            <td colspan="4">Nenhum exame cadastrado</td>
+        {% endif %}
+    </table>
+
+    <div>
+        <div>
+            <span>
+                {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Início</a>
+                <a href="?page={{ page_obj.previous_page_number }}">Anterior</a>
+            {% endif %}
+
+            {% for num in page_obj.paginator.num_range %}
+                {% if page_obj.numer == num %}
+                    <strong>{{num}}</strong>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <a href="?page={{ num }}">{{num}}</a>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Próximo</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Último &raquo;</a>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

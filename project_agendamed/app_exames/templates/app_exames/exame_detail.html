@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        table, table * {
+            border: 1px solid;
+        }
+    </style>
+    <title>Detalhes do Exame</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Nome Completo</th>
+            <th>{{ object.nome }}</th>
+        </tr>
+        <tr>
+            <th>Data de Nascimento</th>
+            <th>{{ object.data_nascimento }}</th>
+        </tr>
+        <tr>
+            <th>Gênero</th>
+            <th>{{ object.get_genero_display }}</th>
+        </tr>
+        <tr>
+            <th>CPF</th>
+            <th>{{ object.cpf }}</th>
+        </tr>
+        <tr>
+            <th>Data/Hora do Cadastro</th>
+            <th>{{ object.data_cadastro }}</th>
+        </tr>
+    </table>
+    <a href="{% url 'exame-update' exame.pk %}">Editar</a>
+    <a href="{% url 'exame-delete' exame.pk %}">Deletar</a>
+    <a href="{% url 'exame-list' %}">Voltar</a>
+</body>
+</html>

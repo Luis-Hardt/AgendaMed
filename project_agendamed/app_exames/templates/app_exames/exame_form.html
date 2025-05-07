@@ -1,0 +1,11 @@
+<h2>{% if exame %}Editar{% else %}Cadastrar{% endif %} Exame</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% if exame %}Salvar{% else %}Cadastrar{% endif %}</button>
+</form>
+{% if exame %}
+<a href="{% url 'exame-detail' exame.pk %}">Cancelar</a>
+{% else %}
+<a href="{% url 'exame-list' %}">Cancelar</a>
+{% endif %}
