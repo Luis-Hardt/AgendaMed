@@ -1,38 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <style>
-        table, table * {
-            border: 1px solid;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'app_exames/css/details_styles.css' %}">
     <title>Detalhes do Exame</title>
 </head>
 <body>
-    <table>
+    <nav class="navbar">
+        <a href="#" class="logo-container">
+            <img src="{% static 'app_exames/images/logo.png' %}" class="logo">
+            <span class="site-name">AgendaMed</span>
+        </a>
+    </nav>
+    <div class="form-container">
+        <h2 class="form-heading">Exame #{{ object.pk|stringformat:'06d' }}</h2>
+
+        <table class="form-table">
         <tr>
             <th>Nome Completo</th>
-            <th>{{ object.nome }}</th>
+            <td>{{ object.nome }}</td>
         </tr>
         <tr>
             <th>Data de Nascimento</th>
-            <th>{{ object.data_nascimento }}</th>
+            <td>{{ object.data_nascimento }}</td>
         </tr>
         <tr>
             <th>Gênero</th>
-            <th>{{ object.get_genero_display }}</th>
+            <td>{{ object.get_genero_display }}</td>
         </tr>
         <tr>
             <th>CPF</th>
-            <th>{{ object.cpf }}</th>
+            <td>{{ object.cpf }}</td>
         </tr>
         <tr>
             <th>Data/Hora do Cadastro</th>
-            <th>{{ object.data_cadastro }}</th>
+            <td>{{ object.data_cadastro }}</td>
         </tr>
     </table>
-    <a href="{% url 'exame-update' exame.pk %}">Editar</a>
-    <a href="{% url 'exame-delete' exame.pk %}">Deletar</a>
-    <a href="{% url 'exame-list' %}">Voltar</a>
+    
+    <div class="details-button-container">
+        <a href="{% url 'exame-update' exame.pk %}" class="function-button">
+            <img src="{% static 'app_exames/images/edit-button.png' %}" class="function-button-edit">
+            Editar
+        </a>
+
+        <a href="{% url 'exame-delete' exame.pk %}" class="function-button">
+            <img src="{% static 'app_exames/images/delete-button.png' %}" class="function-button-delete">
+            Deletar
+        </a>
+
+        <a href="{% url 'exame-list' %}" class="function-button">
+            <img src="{% static 'app_exames/images/back-button.png' %}" class="function-button-back">
+            Voltar
+        </a>
+    </div>
 </body>
 </html>

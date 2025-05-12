@@ -1,11 +1,54 @@
-<h2>{% if exame %}Editar{% else %}Cadastrar{% endif %} Exame</h2>
-<form method="POST">
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="{% static 'app_exames/css/form_styles.css' %}">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">{% if exame %}Salvar{% else %}Cadastrar{% endif %}</button>
-</form>
-{% if exame %}
-<a href="{% url 'exame-detail' exame.pk %}">Cancelar</a>
-{% else %}
-<a href="{% url 'exame-list' %}">Cancelar</a>
-{% endif %}
+    <nav class="navbar">
+        <a href="" class="logo-container">
+            <img src="{% static 'app_exames/images/logo.png' %}" class="logo">
+            <span class="site-name">AgendaMed</span>
+        </a>
+    </nav>
+    
+    <div class="form-container">
+        <div class="form-card">
+        <h2 class="form-heading">{% if exame %}Editar{% else %}Cadastrar{% endif %} Exame</h2>
+
+        <form class="form" method="POST">
+            <div class="form-group">
+                <label for="{{ form.nome.id_for_label }}">Nome Completo:</label>
+                {{ form.nome }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.data_nascimento.id_for_label }}">Data de Nascimento:</label>
+                {{ form.data_nascimento }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.genero.id_for_label }}">Sexo/Gênero:</label>
+                {{ form.genero }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.cpf.id_for_label }}">CPF:</label>
+                {{ form.cpf }}
+            </div>
+        </form>
+
+        <div class="buttons-container">
+            <button type="submit" class="registry-button">{% if exame %}Salvar{% else %}Cadastrar{% endif %}</button>
+
+            {% if exame %}
+                <a href="{% url 'exame-detail' exame.pk %}" class="registry-button">Cancelar</a>
+            {% else %}
+                <a href="{% url 'exame-list' %}" class="registry-button">Cancelar</a>
+            {% endif %}
+        </div>
+
+        </div>
+    </div>
+</body>
+</html>

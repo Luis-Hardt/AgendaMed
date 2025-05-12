@@ -4,7 +4,7 @@ class Exame(models.Model):
     GENERO_CHOICES = [
         ('M', 'Masculino'),
         ('F', 'Feminino'),
-        ('O', 'Outro (especifique)'),
+        ('O', 'Outro'),
         ('N', 'Prefiro não dizer'),
     ]
 

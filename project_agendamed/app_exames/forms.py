@@ -11,5 +11,12 @@ class ExameForm(forms.ModelForm):
             'cpf',
         ]
         widgets = {
-            'data_nascimento': forms.DateInput(attrs={'type': 'date'})
+            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'data_nascimento': forms.DateInput(
+                attrs={
+                    'class': 'form-control',
+                    'type': 'date',
+            }),
+            'genero': forms.TextInput(attrs={'class': 'form-control'}),
+            'cpf': forms.TextInput(attrs={'class': 'form-control'}),
         }
