@@ -1,33 +1,58 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <style>
-        table, table * {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'app_exames/css/styles.css' %}">
     <title>AgendaMed Fila</title>
 </head>
 <body>
-    <h1>Fila de Exames</h1>
-    <a href="{% url 'exame-create' %}">Novo Exame</a>
-    <table>
+    <nav class="navbar">
+        <a href="" class="logo-container">
+            <img src="{% static 'app_exames/images/logo.png' %}" class="logo">
+            <span class="site-name">AgendaMed</span>
+        </a>
+    </nav>
+    <div class="queue-container">
+        <h1 class="queue-heading">Fila para Exame Clínico</h1>
+
+        <div class="queue-buttons-container">
+            <a href="{% url 'exame-create' %}" class="new-exam-button">
+                <img src="{% static 'app_exames/images/patient.png' %}">
+                Cadastrar Exame
+            </a>
+        </div>
+
+        <table class="queue-table">
         {% if exames %}
         <thead>
             <tr>
                 <th>Chamada</th>
                 <th>Status</th>
-                <th>Ações</th>
+                <th>Detalhes</th>
             </tr>
         </thead>
         <tbody>
             {% for exame in exames %}
+
+            {% if exame == first_form %}
+            <tr class="current-patient">
+                <td>{{ exame.pk|stringformat:'06d' }}</td>
+                <td >Aguardando atendimento...</td>
+                <td>
+                    <a href="{% url 'exame-detail' exame.pk %}" class="details-button">
+                        <img src="{% static 'app_exames/images/edit-button.png' %}">
+                    </a>
+                </td>
+            {% else %}
             <tr>
                 <td>{{ exame.pk|stringformat:'06d' }}</td>
-                <td>{% if exame == first_form %}Aguardando{% else %}Em espera{% endif %}</td>
+                <td></td>
                 <td>
-                    <a href="{% url 'exame-detail' exame.pk %}">Visualizar</a>
+                    <a href="{% url 'exame-detail' exame.pk %}" class="details-button">
+                        <img src="{% static 'app_exames/images/edit-button.png' %}">
+                    </a>
                 </td>
+            {% endif %}
             </tr>
             {% endfor %}
         </tbody>
@@ -36,7 +61,7 @@
         {% endif %}
     </table>
 
-    <div>
+    <div class="page-navigation">
         <div>
             <span>
                 {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}
