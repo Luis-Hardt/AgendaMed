@@ -1,7 +1,0 @@
-<h2>Deletar Exame</h2>
-<p>Deseja deletar o exame?</p>
-<form method="POST">
-    {% csrf_token %}
-    <button type="submit">Sim, deletar</button>
-</form>
-<a href="{% url 'exame-detail' exame.pk %}">Cancelar</a>
