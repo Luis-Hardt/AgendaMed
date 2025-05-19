@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ titulo }} - AgendaMed{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <h1 class="mb-4">{{ titulo }}</h1>
+
+    <form method="post" class="bg-white p-4 rounded shadow-sm" novalidate>
+        {% csrf_token %}
+        {{ form.non_field_errors }}
+        {% for field in form %}
+            <div class="mb-3">
+                <label for="{{ field.id_for_label }}" class="form-label text-dark">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <div class="text-danger">{{ field.errors|striptags }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-between mt-4">
+            <a href="{% url 'admin_fila_exames' %}" class="btn btn-secondary">Voltar</a>
+            <button type="submit" class="btn btn-primary">{{ botao|default:"Salvar" }}</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

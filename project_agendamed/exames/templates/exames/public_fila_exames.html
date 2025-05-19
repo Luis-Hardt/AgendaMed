@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Fila de Exames - AgendaMed{% endblock %}
+
+{% block content %}
+<script>
+    setInterval(() => {
+        location.reload();
+    }, 30000);
+</script>
+
+<div class="mb-4 text-center">
+    <a href="{% url 'public_fila_exames' %}" class="btn btn-outline-primary me-2 {% if request.resolver_match.url_name == 'public_fila_exames' %}active{% endif %}">
+        Painel de Atendimento
+    </a>
+    <a href="{% url 'public_exames_concluidos' %}?origem=public" class="btn btn-outline-primary {% if request.resolver_match.url_name == 'exames_concluidos' %}active{% endif %}">
+        Exames Concluídos
+    </a>
+</div>
+
+<h1 class="mb-4 text-center">Painel de Atendimento</h1>
+<h4 class="text-center mb-4">Salas em Atendimento: {{ salas }}</h4>
+
+<div class="mb-5">
+    <h5 class="mb-3">Chamados</h5>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        {% for sala, exame in em_atendimento %}
+            <div class="col">
+                <div class="card text-center shadow-sm h-100 border-0 
+                    {% if exame %}bg-success text-white{% else %}bg-secondary text-white{% endif %}">
+                    <div class="card-body">
+                        <h5 class="card-title">Sala {{ sala }}</h5>
+                        {% if exame %}
+                            <p class="fs-4 m-0">Senha: {{ exame.pk|stringformat:"04d" }}</p>
+                        {% else %}
+                            <p class="fs-6 m-0">Sala vazia</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div>
+    <h5>Próximos da Fila</h5>
+    <ul class="list-group">
+        {% for exame in aguardando %}
+            <li class="list-group-item d-flex justify-content-between align-items-center text-dark fs-6">
+                <span>Senha: <strong>{{ exame.pk|stringformat:"04d" }}</strong></span>
+                <span class="badge bg-primary">Aguardando</span>
+            </li>
+        {% empty %}
+            <div class="alert alert-info">Nenhum paciente aguardando.</div>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Senha Gerada - AgendaMed{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <div class="alert alert-success shadow-sm py-4">
+        <h1 class="mb-4">Exame Registrado com Sucesso!</h1>
+        <h2 class="display-4 text-primary">Senha: {{ exame.pk|stringformat:"04d" }}</h2>
+        <p class="text-muted">Aguarde ser chamado. Dirija-se à sala correspondente quando for solicitado.</p>
+        <div class="mt-4">
+            <a href="{% url 'admin_fila_exames' %}" class="btn btn-outline-primary">Voltar a Fila</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

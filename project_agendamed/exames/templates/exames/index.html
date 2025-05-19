@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <title>AgendaMed - Início</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            background-color: #0d6efd;
+            color: #ffffff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .full-center {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .logo {
+            max-width: 180px;
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            min-width: 200px;
+            font-size: 1.1rem;
+            padding: 12px 24px;
+        }
+
+        .btn-light {
+            color: #0d6efd;
+        }
+
+        @media (max-width: 576px) {
+            .btn-custom {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="full-center container">
+    <img src="{% static 'exames/imgs/logo.png' %}" alt="Logo AgendaMed" class="logo">
+
+    <h1 class="mb-3">Bem-vindo ao Sistema AgendaMed</h1>
+    <p class="lead fw-semibold mb-4">Gerencie com facilidade os exames e o atendimento de pacientes.</p>
+
+    <div class="d-flex justify-content-center gap-4 flex-wrap">
+        <a href="{% url 'admin_fila_exames' %}" class="btn btn-light btn-custom shadow fw-semibold">Painel Administrativo</a>
+        <a href="{% url 'public_fila_exames' %}" class="btn btn-light btn-custom shadow fw-semibold">Painel Público</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+s

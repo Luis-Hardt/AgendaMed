@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Excluir Exame #{{ exame.pk|stringformat:"04d" }} - AgendaMed{% endblock %}
+
+{% block content %}
+<div class="container mt-5" style="max-width: 600px;">
+    <div class="alert alert-warning border border-danger-subtle shadow-sm">
+        <h1 class="h4">Confirmação de Exclusão</h1>
+        <p class="mb-0">
+            Tem certeza que deseja <strong class="text-danger">excluir</strong> o exame <strong>#{{ exame.pk|stringformat:"04d" }}</strong>?
+            Esta ação não poderá ser desfeita.
+        </p>
+    </div>
+
+    <form method="post" class="d-flex justify-content-between mt-4">
+        {% csrf_token %}
+        <a href="{% url 'exame_detalhes' exame.pk %}" class="btn btn-outline-secondary">Cancelar</a>
+        <button type="submit" class="btn btn-danger">Sim, Excluir</button>
+    </form>
+</div>
+{% endblock %}

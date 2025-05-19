@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes do Exame{% endblock %}
+
+{% block content %}
+<div class="container mt-5 bg-white p-4 rounded shadow-sm" style="max-width: 600px;">
+    <h1 class="mb-4">Detalhes do Exame</h1>
+
+    <ul class="list-group mb-4">
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-semibold">Senha:</span>
+            <span class="text-primary">{{ exame.pk|stringformat:"04d" }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-semibold">Nome:</span>
+            <span>{{ exame.nome }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-semibold">CPF:</span>
+            <span>{{ exame.cpf }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-semibold">Nascimento:</span>
+            <span>{{ exame.data_nascimento|date:"d/m/Y" }}</span>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+            <span class="fw-semibold">Gênero:</span>
+            <span>{{ exame.get_genero_display }}</span>
+        </li>
+    </ul>
+
+    <div class="d-flex justify-content-between">
+        <a href="{% url 'exame_editar' exame.pk %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'exame_excluir' exame.pk %}" class="btn btn-danger">Excluir</a>
+        <a href="{% url 'admin_fila_exames' %}" class="btn btn-secondary">Voltar</a>
+    </div>
+</div>
+{% endblock %}
